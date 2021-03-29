@@ -1,0 +1,1231 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      cni.projectcalico.org/podIP: 172.16.207.35/32
+      cni.projectcalico.org/podIPs: 172.16.207.35/32
+      prometheus.io/port: "7472"
+      prometheus.io/scrape: "true"
+    creationTimestamp: "2021-03-29T21:27:59Z"
+    generateName: controller-64f86798cc-
+    labels:
+      app: metallb
+      component: controller
+      pod-template-hash: 64f86798cc
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:prometheus.io/port: {}
+            f:prometheus.io/scrape: {}
+          f:generateName: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:component: {}
+            f:pod-template-hash: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"257cf974-5af5-4f59-bff6-06dec4aae885"}:
+              .: {}
+              f:apiVersion: {}
+              f:blockOwnerDeletion: {}
+              f:controller: {}
+              f:kind: {}
+              f:name: {}
+              f:uid: {}
+        f:spec:
+          f:containers:
+            k:{"name":"controller"}:
+              .: {}
+              f:args: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:name: {}
+              f:ports:
+                .: {}
+                k:{"containerPort":7472,"protocol":"TCP"}:
+                  .: {}
+                  f:containerPort: {}
+                  f:name: {}
+                  f:protocol: {}
+              f:resources:
+                .: {}
+                f:limits:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+                f:requests:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+              f:securityContext:
+                .: {}
+                f:allowPrivilegeEscalation: {}
+                f:capabilities:
+                  .: {}
+                  f:drop: {}
+                f:readOnlyRootFilesystem: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+          f:dnsPolicy: {}
+          f:enableServiceLinks: {}
+          f:nodeSelector:
+            .: {}
+            f:kubernetes.io/os: {}
+          f:restartPolicy: {}
+          f:schedulerName: {}
+          f:securityContext:
+            .: {}
+            f:runAsNonRoot: {}
+            f:runAsUser: {}
+          f:serviceAccount: {}
+          f:serviceAccountName: {}
+          f:terminationGracePeriodSeconds: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2021-03-29T21:27:59Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:cni.projectcalico.org/podIP: {}
+            f:cni.projectcalico.org/podIPs: {}
+      manager: calico
+      operation: Update
+      time: "2021-03-29T21:28:00Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:conditions:
+            k:{"type":"ContainersReady"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Initialized"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Ready"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+          f:containerStatuses: {}
+          f:hostIP: {}
+          f:phase: {}
+          f:podIP: {}
+          f:podIPs:
+            .: {}
+            k:{"ip":"172.16.207.35"}:
+              .: {}
+              f:ip: {}
+          f:startTime: {}
+      manager: kubelet
+      operation: Update
+      time: "2021-03-29T21:28:14Z"
+    name: controller-64f86798cc-bpcw8
+    namespace: metallb-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: controller-64f86798cc
+      uid: 257cf974-5af5-4f59-bff6-06dec4aae885
+    resourceVersion: "525614"
+    uid: b9807cd6-efe4-4bcc-a7a7-978c590dae88
+  spec:
+    containers:
+    - args:
+      - --port=7472
+      - --config=config
+      image: metallb/controller:v0.9.6
+      imagePullPolicy: Always
+      name: controller
+      ports:
+      - containerPort: 7472
+        name: monitoring
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 100m
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 100Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - all
+        readOnlyRootFilesystem: true
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: controller-token-z8l9x
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: latitude
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 65534
+    serviceAccount: controller
+    serviceAccountName: controller
+    terminationGracePeriodSeconds: 0
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: controller-token-z8l9x
+      secret:
+        defaultMode: 420
+        secretName: controller-token-z8l9x
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2021-03-29T21:27:59Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2021-03-29T21:28:14Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2021-03-29T21:28:14Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2021-03-29T21:27:59Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://15350e2ed8840ee0c1257ced6822f3e678885255f5b87476c85e4fbab3b20f3d
+      image: metallb/controller:v0.9.6
+      imageID: docker-pullable://metallb/controller@sha256:fbfdb9d3f55976b0ee38f3309d83a4ca703efcf15d6ca7889cd8189142286502
+      lastState: {}
+      name: controller
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2021-03-29T21:28:13Z"
+    hostIP: 192.168.15.20
+    phase: Running
+    podIP: 172.16.207.35
+    podIPs:
+    - ip: 172.16.207.35
+    qosClass: Guaranteed
+    startTime: "2021-03-29T21:27:59Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      prometheus.io/port: "7472"
+      prometheus.io/scrape: "true"
+    creationTimestamp: "2021-03-29T21:27:59Z"
+    generateName: speaker-
+    labels:
+      app: metallb
+      component: speaker
+      controller-revision-hash: 55bc7b86b5
+      pod-template-generation: "1"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:prometheus.io/port: {}
+            f:prometheus.io/scrape: {}
+          f:generateName: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:component: {}
+            f:controller-revision-hash: {}
+            f:pod-template-generation: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"cd3b4b1f-23dc-4738-b811-85590433d99d"}:
+              .: {}
+              f:apiVersion: {}
+              f:blockOwnerDeletion: {}
+              f:controller: {}
+              f:kind: {}
+              f:name: {}
+              f:uid: {}
+        f:spec:
+          f:affinity:
+            .: {}
+            f:nodeAffinity:
+              .: {}
+              f:requiredDuringSchedulingIgnoredDuringExecution:
+                .: {}
+                f:nodeSelectorTerms: {}
+          f:containers:
+            k:{"name":"speaker"}:
+              .: {}
+              f:args: {}
+              f:env:
+                .: {}
+                k:{"name":"METALLB_HOST"}:
+                  .: {}
+                  f:name: {}
+                  f:valueFrom:
+                    .: {}
+                    f:fieldRef:
+                      .: {}
+                      f:apiVersion: {}
+                      f:fieldPath: {}
+                k:{"name":"METALLB_ML_BIND_ADDR"}:
+                  .: {}
+                  f:name: {}
+                  f:valueFrom:
+                    .: {}
+                    f:fieldRef:
+                      .: {}
+                      f:apiVersion: {}
+                      f:fieldPath: {}
+                k:{"name":"METALLB_ML_LABELS"}:
+                  .: {}
+                  f:name: {}
+                  f:value: {}
+                k:{"name":"METALLB_ML_NAMESPACE"}:
+                  .: {}
+                  f:name: {}
+                  f:valueFrom:
+                    .: {}
+                    f:fieldRef:
+                      .: {}
+                      f:apiVersion: {}
+                      f:fieldPath: {}
+                k:{"name":"METALLB_ML_SECRET_KEY"}:
+                  .: {}
+                  f:name: {}
+                  f:valueFrom:
+                    .: {}
+                    f:secretKeyRef:
+                      .: {}
+                      f:key: {}
+                      f:name: {}
+                k:{"name":"METALLB_NODE_NAME"}:
+                  .: {}
+                  f:name: {}
+                  f:valueFrom:
+                    .: {}
+                    f:fieldRef:
+                      .: {}
+                      f:apiVersion: {}
+                      f:fieldPath: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:name: {}
+              f:ports:
+                .: {}
+                k:{"containerPort":7472,"protocol":"TCP"}:
+                  .: {}
+                  f:containerPort: {}
+                  f:hostPort: {}
+                  f:name: {}
+                  f:protocol: {}
+              f:resources:
+                .: {}
+                f:limits:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+                f:requests:
+                  .: {}
+                  f:cpu: {}
+                  f:memory: {}
+              f:securityContext:
+                .: {}
+                f:allowPrivilegeEscalation: {}
+                f:capabilities:
+                  .: {}
+                  f:add: {}
+                  f:drop: {}
+                f:readOnlyRootFilesystem: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+          f:dnsPolicy: {}
+          f:enableServiceLinks: {}
+          f:hostNetwork: {}
+          f:nodeSelector:
+            .: {}
+            f:kubernetes.io/os: {}
+          f:restartPolicy: {}
+          f:schedulerName: {}
+          f:securityContext: {}
+          f:serviceAccount: {}
+          f:serviceAccountName: {}
+          f:terminationGracePeriodSeconds: {}
+          f:tolerations: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2021-03-29T21:27:59Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:conditions:
+            k:{"type":"ContainersReady"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Initialized"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Ready"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+          f:containerStatuses: {}
+          f:hostIP: {}
+          f:phase: {}
+          f:podIP: {}
+          f:podIPs:
+            .: {}
+            k:{"ip":"192.168.15.20"}:
+              .: {}
+              f:ip: {}
+          f:startTime: {}
+      manager: kubelet
+      operation: Update
+      time: "2021-03-29T21:28:06Z"
+    name: speaker-bsxk4
+    namespace: metallb-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: DaemonSet
+      name: speaker
+      uid: cd3b4b1f-23dc-4738-b811-85590433d99d
+    resourceVersion: "525599"
+    uid: 6b522856-428e-4270-a3e0-4890d4c3c8de
+  spec:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchFields:
+            - key: metadata.name
+              operator: In
+              values:
+              - latitude
+    containers:
+    - args:
+      - --port=7472
+      - --config=config
+      env:
+      - name: METALLB_NODE_NAME
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: spec.nodeName
+      - name: METALLB_HOST
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: status.hostIP
+      - name: METALLB_ML_BIND_ADDR
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: status.podIP
+      - name: METALLB_ML_LABELS
+        value: app=metallb,component=speaker
+      - name: METALLB_ML_NAMESPACE
+        valueFrom:
+          fieldRef:
+            apiVersion: v1
+            fieldPath: metadata.namespace
+      - name: METALLB_ML_SECRET_KEY
+        valueFrom:
+          secretKeyRef:
+            key: secretkey
+            name: memberlist
+      image: metallb/speaker:v0.9.6
+      imagePullPolicy: Always
+      name: speaker
+      ports:
+      - containerPort: 7472
+        hostPort: 7472
+        name: monitoring
+        protocol: TCP
+      resources:
+        limits:
+          cpu: 100m
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 100Mi
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          add:
+          - NET_ADMIN
+          - NET_RAW
+          - SYS_ADMIN
+          drop:
+          - ALL
+        readOnlyRootFilesystem: true
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: speaker-token-jphnt
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    hostNetwork: true
+    nodeName: latitude
+    nodeSelector:
+      kubernetes.io/os: linux
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: speaker
+    serviceAccountName: speaker
+    terminationGracePeriodSeconds: 2
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/master
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/disk-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/pid-pressure
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/unschedulable
+      operator: Exists
+    - effect: NoSchedule
+      key: node.kubernetes.io/network-unavailable
+      operator: Exists
+    volumes:
+    - name: speaker-token-jphnt
+      secret:
+        defaultMode: 420
+        secretName: speaker-token-jphnt
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2021-03-29T21:27:59Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2021-03-29T21:28:06Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2021-03-29T21:28:06Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2021-03-29T21:27:59Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://49283550e9e7b78002489568062f06727b286fbcfc91f1469a3eea5e37765cf6
+      image: metallb/speaker:v0.9.6
+      imageID: docker-pullable://metallb/speaker@sha256:c66585a805bed1a3b829d8fb4a4aab9d87233497244ebff96f1b88f1e7f8f991
+      lastState: {}
+      name: speaker
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2021-03-29T21:28:06Z"
+    hostIP: 192.168.15.20
+    phase: Running
+    podIP: 192.168.15.20
+    podIPs:
+    - ip: 192.168.15.20
+    qosClass: Guaranteed
+    startTime: "2021-03-29T21:27:59Z"
+- apiVersion: apps/v1
+  kind: DaemonSet
+  metadata:
+    annotations:
+      deprecated.daemonset.template.generation: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"annotations":{},"labels":{"app":"metallb","component":"speaker"},"name":"speaker","namespace":"metallb-system"},"spec":{"selector":{"matchLabels":{"app":"metallb","component":"speaker"}},"template":{"metadata":{"annotations":{"prometheus.io/port":"7472","prometheus.io/scrape":"true"},"labels":{"app":"metallb","component":"speaker"}},"spec":{"containers":[{"args":["--port=7472","--config=config"],"env":[{"name":"METALLB_NODE_NAME","valueFrom":{"fieldRef":{"fieldPath":"spec.nodeName"}}},{"name":"METALLB_HOST","valueFrom":{"fieldRef":{"fieldPath":"status.hostIP"}}},{"name":"METALLB_ML_BIND_ADDR","valueFrom":{"fieldRef":{"fieldPath":"status.podIP"}}},{"name":"METALLB_ML_LABELS","value":"app=metallb,component=speaker"},{"name":"METALLB_ML_NAMESPACE","valueFrom":{"fieldRef":{"fieldPath":"metadata.namespace"}}},{"name":"METALLB_ML_SECRET_KEY","valueFrom":{"secretKeyRef":{"key":"secretkey","name":"memberlist"}}}],"image":"metallb/speaker:v0.9.6","imagePullPolicy":"Always","name":"speaker","ports":[{"containerPort":7472,"name":"monitoring"}],"resources":{"limits":{"cpu":"100m","memory":"100Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"add":["NET_ADMIN","NET_RAW","SYS_ADMIN"],"drop":["ALL"]},"readOnlyRootFilesystem":true}}],"hostNetwork":true,"nodeSelector":{"kubernetes.io/os":"linux"},"serviceAccountName":"speaker","terminationGracePeriodSeconds":2,"tolerations":[{"effect":"NoSchedule","key":"node-role.kubernetes.io/master"}]}}}}
+    creationTimestamp: "2021-03-29T21:27:59Z"
+    generation: 1
+    labels:
+      app: metallb
+      component: speaker
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:deprecated.daemonset.template.generation: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:component: {}
+        f:spec:
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:prometheus.io/port: {}
+                f:prometheus.io/scrape: {}
+              f:labels:
+                .: {}
+                f:app: {}
+                f:component: {}
+            f:spec:
+              f:containers:
+                k:{"name":"speaker"}:
+                  .: {}
+                  f:args: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"METALLB_HOST"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef:
+                          .: {}
+                          f:apiVersion: {}
+                          f:fieldPath: {}
+                    k:{"name":"METALLB_ML_BIND_ADDR"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef:
+                          .: {}
+                          f:apiVersion: {}
+                          f:fieldPath: {}
+                    k:{"name":"METALLB_ML_LABELS"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"METALLB_ML_NAMESPACE"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef:
+                          .: {}
+                          f:apiVersion: {}
+                          f:fieldPath: {}
+                    k:{"name":"METALLB_ML_SECRET_KEY"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:secretKeyRef:
+                          .: {}
+                          f:key: {}
+                          f:name: {}
+                    k:{"name":"METALLB_NODE_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef:
+                          .: {}
+                          f:apiVersion: {}
+                          f:fieldPath: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":7472,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:hostPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:add: {}
+                      f:drop: {}
+                    f:readOnlyRootFilesystem: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+              f:dnsPolicy: {}
+              f:hostNetwork: {}
+              f:nodeSelector:
+                .: {}
+                f:kubernetes.io/os: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+          f:updateStrategy:
+            f:rollingUpdate:
+              .: {}
+              f:maxUnavailable: {}
+            f:type: {}
+      manager: kubectl-client-side-apply
+      operation: Update
+      time: "2021-03-29T21:27:59Z"
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:currentNumberScheduled: {}
+          f:desiredNumberScheduled: {}
+          f:numberAvailable: {}
+          f:numberReady: {}
+          f:observedGeneration: {}
+          f:updatedNumberScheduled: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2021-03-29T21:28:06Z"
+    name: speaker
+    namespace: metallb-system
+    resourceVersion: "525600"
+    uid: cd3b4b1f-23dc-4738-b811-85590433d99d
+  spec:
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: metallb
+        component: speaker
+    template:
+      metadata:
+        annotations:
+          prometheus.io/port: "7472"
+          prometheus.io/scrape: "true"
+        creationTimestamp: null
+        labels:
+          app: metallb
+          component: speaker
+      spec:
+        containers:
+        - args:
+          - --port=7472
+          - --config=config
+          env:
+          - name: METALLB_NODE_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: spec.nodeName
+          - name: METALLB_HOST
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.hostIP
+          - name: METALLB_ML_BIND_ADDR
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.podIP
+          - name: METALLB_ML_LABELS
+            value: app=metallb,component=speaker
+          - name: METALLB_ML_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: METALLB_ML_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                key: secretkey
+                name: memberlist
+          image: metallb/speaker:v0.9.6
+          imagePullPolicy: Always
+          name: speaker
+          ports:
+          - containerPort: 7472
+            hostPort: 7472
+            name: monitoring
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              add:
+              - NET_ADMIN
+              - NET_RAW
+              - SYS_ADMIN
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        hostNetwork: true
+        nodeSelector:
+          kubernetes.io/os: linux
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: speaker
+        serviceAccountName: speaker
+        terminationGracePeriodSeconds: 2
+        tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+    updateStrategy:
+      rollingUpdate:
+        maxUnavailable: 1
+      type: RollingUpdate
+  status:
+    currentNumberScheduled: 1
+    desiredNumberScheduled: 1
+    numberAvailable: 1
+    numberMisscheduled: 0
+    numberReady: 1
+    observedGeneration: 1
+    updatedNumberScheduled: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"metallb","component":"controller"},"name":"controller","namespace":"metallb-system"},"spec":{"revisionHistoryLimit":3,"selector":{"matchLabels":{"app":"metallb","component":"controller"}},"template":{"metadata":{"annotations":{"prometheus.io/port":"7472","prometheus.io/scrape":"true"},"labels":{"app":"metallb","component":"controller"}},"spec":{"containers":[{"args":["--port=7472","--config=config"],"image":"metallb/controller:v0.9.6","imagePullPolicy":"Always","name":"controller","ports":[{"containerPort":7472,"name":"monitoring"}],"resources":{"limits":{"cpu":"100m","memory":"100Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["all"]},"readOnlyRootFilesystem":true}}],"nodeSelector":{"kubernetes.io/os":"linux"},"securityContext":{"runAsNonRoot":true,"runAsUser":65534},"serviceAccountName":"controller","terminationGracePeriodSeconds":0}}}}
+    creationTimestamp: "2021-03-29T21:27:59Z"
+    generation: 1
+    labels:
+      app: metallb
+      component: controller
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:component: {}
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:rollingUpdate:
+              .: {}
+              f:maxSurge: {}
+              f:maxUnavailable: {}
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:prometheus.io/port: {}
+                f:prometheus.io/scrape: {}
+              f:labels:
+                .: {}
+                f:app: {}
+                f:component: {}
+            f:spec:
+              f:containers:
+                k:{"name":"controller"}:
+                  .: {}
+                  f:args: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":7472,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:readOnlyRootFilesystem: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+              f:dnsPolicy: {}
+              f:nodeSelector:
+                .: {}
+                f:kubernetes.io/os: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                .: {}
+                f:runAsNonRoot: {}
+                f:runAsUser: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+      manager: kubectl-client-side-apply
+      operation: Update
+      time: "2021-03-29T21:27:59Z"
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2021-03-29T21:28:14Z"
+    name: controller
+    namespace: metallb-system
+    resourceVersion: "525616"
+    uid: 917d6f9c-ed85-43ad-8bd4-1d919e12ae41
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 3
+    selector:
+      matchLabels:
+        app: metallb
+        component: controller
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          prometheus.io/port: "7472"
+          prometheus.io/scrape: "true"
+        creationTimestamp: null
+        labels:
+          app: metallb
+          component: controller
+      spec:
+        containers:
+        - args:
+          - --port=7472
+          - --config=config
+          image: metallb/controller:v0.9.6
+          imagePullPolicy: Always
+          name: controller
+          ports:
+          - containerPort: 7472
+            name: monitoring
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - all
+            readOnlyRootFilesystem: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        nodeSelector:
+          kubernetes.io/os: linux
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 65534
+        serviceAccount: controller
+        serviceAccountName: controller
+        terminationGracePeriodSeconds: 0
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2021-03-29T21:28:14Z"
+      lastUpdateTime: "2021-03-29T21:28:14Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2021-03-29T21:27:59Z"
+      lastUpdateTime: "2021-03-29T21:28:14Z"
+      message: ReplicaSet "controller-64f86798cc" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2021-03-29T21:27:59Z"
+    generation: 1
+    labels:
+      app: metallb
+      component: controller
+      pod-template-hash: 64f86798cc
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:deployment.kubernetes.io/desired-replicas: {}
+            f:deployment.kubernetes.io/max-replicas: {}
+            f:deployment.kubernetes.io/revision: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:component: {}
+            f:pod-template-hash: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"917d6f9c-ed85-43ad-8bd4-1d919e12ae41"}:
+              .: {}
+              f:apiVersion: {}
+              f:blockOwnerDeletion: {}
+              f:controller: {}
+              f:kind: {}
+              f:name: {}
+              f:uid: {}
+        f:spec:
+          f:replicas: {}
+          f:selector: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:prometheus.io/port: {}
+                f:prometheus.io/scrape: {}
+              f:labels:
+                .: {}
+                f:app: {}
+                f:component: {}
+                f:pod-template-hash: {}
+            f:spec:
+              f:containers:
+                k:{"name":"controller"}:
+                  .: {}
+                  f:args: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":7472,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:allowPrivilegeEscalation: {}
+                    f:capabilities:
+                      .: {}
+                      f:drop: {}
+                    f:readOnlyRootFilesystem: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+              f:dnsPolicy: {}
+              f:nodeSelector:
+                .: {}
+                f:kubernetes.io/os: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext:
+                .: {}
+                f:runAsNonRoot: {}
+                f:runAsUser: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+        f:status:
+          f:availableReplicas: {}
+          f:fullyLabeledReplicas: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2021-03-29T21:28:14Z"
+    name: controller-64f86798cc
+    namespace: metallb-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: controller
+      uid: 917d6f9c-ed85-43ad-8bd4-1d919e12ae41
+    resourceVersion: "525615"
+    uid: 257cf974-5af5-4f59-bff6-06dec4aae885
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: metallb
+        component: controller
+        pod-template-hash: 64f86798cc
+    template:
+      metadata:
+        annotations:
+          prometheus.io/port: "7472"
+          prometheus.io/scrape: "true"
+        creationTimestamp: null
+        labels:
+          app: metallb
+          component: controller
+          pod-template-hash: 64f86798cc
+      spec:
+        containers:
+        - args:
+          - --port=7472
+          - --config=config
+          image: metallb/controller:v0.9.6
+          imagePullPolicy: Always
+          name: controller
+          ports:
+          - containerPort: 7472
+            name: monitoring
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - all
+            readOnlyRootFilesystem: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        nodeSelector:
+          kubernetes.io/os: linux
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 65534
+        serviceAccount: controller
+        serviceAccountName: controller
+        terminationGracePeriodSeconds: 0
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

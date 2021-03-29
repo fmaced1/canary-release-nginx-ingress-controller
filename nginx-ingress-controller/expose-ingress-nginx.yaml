@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/name: canary
+    app.kubernetes.io/part-of: canary
+  namespace: canary
+  name: canary
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app.kubernetes.io/name: canary
+    app.kubernetes.io/part-of: canary
+  type: LoadBalancer
+status:
+  loadBalancer: {}
