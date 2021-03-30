@@ -76,13 +76,15 @@ count=0; while sleep 0.3; do let count+=1 ;echo $count - $(curl -s k8s.local); d
 3 - Host: my-app-v1-84ff7f48cc-kcn57, Version: v1.0.0
 ```
 
-Agora vamos dividir o tráfego, 4% para o svc app-v2 e o resto continua no svc da app-v1:
+Agora vamos dividir o tráfego, 10% para o svc app-v2 e o resto continua no svc da app-v1:
 ```bash
 kubectl apply -f nginx-canary/by-weight/ingress-v2-canary.yaml
 ```
 
 ### Veja no terminal que estamos usando para fazer as requisições, algumas estão indo para a app-v2:
 ```bash
+bash canary/nginx-canary/curl-canary.sh k8s.local
+...
 v1: 290 v2: 30 - Host: my-app-v1-84ff7f48cc-4d9kq, Version: v1.0.0
 v1: 291 v2: 30 - Host: my-app-v1-84ff7f48cc-4d9kq, Version: v1.0.0
 v1: 292 v2: 30 - Host: my-app-v1-84ff7f48cc-4d9kq, Version: v1.0.0

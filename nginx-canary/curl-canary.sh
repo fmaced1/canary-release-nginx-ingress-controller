@@ -1,7 +1,6 @@
 #!/bin/bash
 
 host=$0
-host="k8s.local"
 
 v1=0
 v2=0
