@@ -46,13 +46,13 @@ Faça o deploy da aplicação v1:
 ```bash
 # app-v1.yaml contém o deploy e o svc
 # ingress-v1.yaml contém a rota
-kubectl apply -f nginx-canary/app-v1.yaml -f nginx-canary/ingress-v1.yaml
+kubectl apply -f nginx-canary/apps/app-v1.yaml -f nginx-canary/apps/ingress-v1.yaml
 ```
 
 Agora faça o deploy da segunda versão:
 ```bash
 # app-v2.yaml contém o deploy e o svc
-kubectl apply -f nginx-canary/app-v2.yaml
+kubectl apply -f nginx-canary/apps/app-v2.yaml
 ```
 
 ```bash
@@ -78,18 +78,32 @@ count=0; while sleep 0.3; do let count+=1 ;echo $count - $(curl -s k8s.local); d
 
 Agora vamos dividir o tráfego, 4% para o svc app-v2 e o resto continua no svc da app-v1:
 ```bash
-kubectl apply -f nginx-canary/ingress-v2-canary.yaml
+kubectl apply -f nginx-canary/by-weight/ingress-v2-canary.yaml
 ```
 
 ### Veja no terminal que estamos usando para fazer as requisições, algumas estão indo para a app-v2:
-#
+```bash
+v1: 290 v2: 30 - Host: my-app-v1-84ff7f48cc-4d9kq, Version: v1.0.0
+v1: 291 v2: 30 - Host: my-app-v1-84ff7f48cc-4d9kq, Version: v1.0.0
+v1: 292 v2: 30 - Host: my-app-v1-84ff7f48cc-4d9kq, Version: v1.0.0
+v1: 293 v2: 30 - Host: my-app-v1-84ff7f48cc-4d9kq, Version: v1.0.0
+v1: 294 v2: 30 - Host: my-app-v1-84ff7f48cc-4d9kq, Version: v1.0.0
+v1: 295 v2: 30 - Host: my-app-v1-84ff7f48cc-4d9kq, Version: v1.0.0
+v1: 296 v2: 30 - Host: my-app-v1-84ff7f48cc-4d9kq, Version: v1.0.0
+v1: 297 v2: 30 - Host: my-app-v1-84ff7f48cc-4d9kq, Version: v1.0.0
+v1: 297 v2: 31 - Host: my-app-v2-dfdff8845-n6bml, Version: v2.0.0
+v1: 298 v2: 31 - Host: my-app-v1-84ff7f48cc-4d9kq, Version: v1.0.0
+v1: 299 v2: 31 - Host: my-app-v1-84ff7f48cc-4d9kq, Version: v1.0.0
+v1: 300 v2: 31 - Host: my-app-v1-84ff7f48cc-4d9kq, Version: v1.0.0
+v1: 300 v2: 32 - Host: my-app-v2-dfdff8845-n6bml, Version: v2.0.0
+```
 
 Quando estiver satisfeito com a app-v2, exclua o ingress-canary:
 ```bash
-kubectl delete -f nginx-canary/ingress-v2-canary.yaml
+kubectl delete -f nginx-canary/by-weight/ingress-v2-canary.yaml
 ```
 
 E vire todo o tráfego para a app-v2
 ```bash
-kubectl apply -f nginx-canary/ingress-v2.yaml
+kubectl apply -f nginx-canary/apps/ingress-v2.yaml
 ```
