@@ -1,5 +1,7 @@
 # Canary release com o nginx no k8s
 
+![Canary with nginx ingress controller](https://pek3b.qingstor.com/kubesphere-docs/png/20200229182539.png)
+
 ## Sobre <a name = "sobre"></a>
 
 Canary release usando nginx-ingress controller, metallb no k8s
@@ -55,6 +57,8 @@ Agora faça o deploy da segunda versão:
 kubectl apply -f nginx-canary/apps/app-v2.yaml
 ```
 
+Liste o serviço ingress-nginx para saber o ip que a sua app irá responder, esse ip irá responder por **k8s.local**.
+
 ```bash
 kubectl get svc ingress-nginx -n ingress-nginx
 NAME            TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
@@ -81,7 +85,7 @@ Agora vamos dividir o tráfego, 10% para o svc app-v2 e o resto continua no svc 
 kubectl apply -f nginx-canary/by-weight/ingress-v2-canary.yaml
 ```
 
-### Veja no terminal que estamos usando para fazer as requisições, algumas estão indo para a app-v2:
+### Veja que de 300 requisições apenas 32 foram para app v2:
 ```bash
 bash canary/nginx-canary/curl-canary.sh k8s.local
 ...
